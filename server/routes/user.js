@@ -1,27 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
-const Account = require('../models/Accounts');
-var jwt = require('jsonwebtoken');
+const loginValidation = require('../utils/loginValidation');
+const getUserId = require("../utils/getUserId");
+const { loginUser, getUser, getAllUser } = require('../controllers/user');
 
-router.post('/', async (req, res) => {
-  try {
-    const newUser = await User.create(req.body);
+router.post('/', loginValidation, loginUser);
 
-    const accountNumber = Date.now()*3118
-    const user = newUser._id
+router.get('/', getUserId, getUser );
 
-    await Account.create({accountNumber, user})
-
-    const authToken = jwt.sign({id:newUser._id}, process.env.JWT_STRING)
-
-    
-
-    res.status(201).json({authToken});
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+router.get('/all', getUserId, getAllUser );
 
 module.exports = router;

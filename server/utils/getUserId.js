@@ -8,7 +8,7 @@ const getUserId = (req, res, next) => {
 
     try {
         let decoded = jwt.verify(token, Jwt_Str);
-        req.user = decoded.user;
+        req.user = decoded.id;
         
         next();
     } catch (err) {

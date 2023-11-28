@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
     enum: ['customer', 'banker'],
     required: true,
   },
+  accid:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Account',
+},
 });
 
 const User = mongoose.model('User', userSchema);
