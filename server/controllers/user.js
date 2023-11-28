@@ -1,0 +1,4 @@
+
+exports.loginUser = (req, res) =>{
+
+}

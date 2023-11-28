@@ -30,7 +30,7 @@ const accountSchema = new mongoose.Schema({
             default: Date.now,
         },
     }],
-});
+}, { timestamps: true });
 
 const Account = mongoose.model('Account', accountSchema);
 
